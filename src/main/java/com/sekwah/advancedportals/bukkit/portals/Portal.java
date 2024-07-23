@@ -467,20 +467,6 @@ public class Portal {
             return false;
         }
 
-        Long joinCD = joinCooldown.get(player.getName());
-        if (joinCD != null) {
-            int diff = (int) ((System.currentTimeMillis() - joinCD) / 1000);
-            if (diff < joinCooldownDelay) {
-                int time = (joinCooldownDelay - diff);
-                player.sendMessage(ChatColor.RED + "There is " + ChatColor.YELLOW + time + ChatColor.RED + (time == 1 ? " second" : " seconds") + " join cooldown protection left.");
-                failSound(player, portal);
-                if(doKnockback)
-                    throwPlayerBack(player);
-                return false;
-            }
-            joinCooldown.remove(player.getName());
-        }
-
         HashMap<String, Long> cds = cooldown.get(player.getName());
         if (cds != null) {
             if (cds.get(portal.getName()) != null) {
